@@ -14,3 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(["prefix" => "api/v1"], function ($router) {
+  $router->post("users/signup", ['middleware' => 'signup', "uses"=>"UserController@createUser"]);
+  $router->get("users", "UserController@findAllUsers");
+});
